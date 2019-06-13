@@ -287,3 +287,35 @@ This calls the function you should add to the bottom of the file:-
 
 Stretch goal. Can you fill in the values marked with DIY? 
 Even stretchier goal - If You Dare - can you make an image appear of the weather in the last line of the function? 
+
+## Add a Map To Make Things Easier
+Not many people know the longitude and latitude, so let's add a map to help everyone.
+
+In the `<head>` of the index.html file add the following line:-
+
+    <link rel="stylesheet"  href="https://openlayers.org/en/v4.6.5/css/ol.css"  type="text/css"  />
+
+Then, below the HTML you added earlier for the table (but above the `</body>` tag) add:-
+
+    <br>
+    <div class="center"  id="map">
+        <!-- Your map will be shown inside this div-->
+        <script src="https://openlayers.org/en/v4.6.5/build/ol.js"  type="text/javascript"></script>
+        <!-- Openlayesr JS file -->
+        <script type="text/javascript"  src="map.js"  type="text/javascript"></script>
+    </div>
+
+This first script file reaches out to openlayers.org to provide mapping data. The second is our configuration file to draw the map on the page. As part of that we have included some code to retrieve the longitude and latitude of wherever is clicked on the map.
+
+Next, we will tie the two systems together. We have already written a function, populateData() that will add update our table, so at the bottom of the map.js file, update it to call the function inside the .then call:-
+
+    .then(function(myJson)  {
+        console.log(JSON.stringify(myJson));
+        populateData(myJson)
+    });
+
+## Test It Out
+Reload the page, try clicking on the map. Does the table update?
+
+Stretch Goal 1 - can you update the default map location and/or zoom? (to the Colosseum in Rome)
+Stretch Goal 2 - can you update the size of the map on the page? 

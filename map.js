@@ -8,7 +8,7 @@ const localmap = new ol.Map({
   target: 'map',
   view: new ol.View({
       center: [-658587.715260747, 7283495.399471995],
-      zoom: 15
+      zoom: 9
   })
 });
 
@@ -32,12 +32,13 @@ var latitude = coOrdinatesClicked[1]
 console.log('longitude: ', longitude);
 console.log('latitude: ', latitude);
 
-fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=f068cf2b97cce83602ca4bc9c1b180b5&units=metric')
+fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=&units=metric')
   .then(function(response) {
     return response.json();
   })
   .then(function(myJson) {
     console.log(JSON.stringify(myJson));
+    populateData(myJson)
   });
 
 });
