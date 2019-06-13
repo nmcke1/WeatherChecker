@@ -32,7 +32,7 @@ var latitude = coOrdinatesClicked[1]
 console.log('longitude: ', longitude);
 console.log('latitude: ', latitude);
 
-fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=&units=metric')
+fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=f068cf2b97cce83602ca4bc9c1b180b5&units=metric')
   .then(function(response) {
     return response.json();
   })
