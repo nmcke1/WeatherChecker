@@ -210,3 +210,80 @@ We are going to use parts of this data to build our own weather report.
 The values you see above for dt (datetime) and sunrise/sunset are in a format called unix epoch time. This is the number of seconds since 1970-01-01 00:00:00 UTC. This means you don't have to worry about timezones or daylight savings time. You can read more about it at  
 [https://en.wikipedia.org/wiki/Unix_time](https://en.wikipedia.org/wiki/Unix_time)
 
+To convert to human readable datetimes look at [https://www.epochconverter.com/](https://www.epochconverter.com/)
+
+## Build a Table
+Above the closing `</body>` tag add the following code. This is HTML for a table we can add the data into to ensure that remains laid out correctly.
+
+    <br>
+    <div>
+    <table class="weatherTable">
+    <tbody>
+    <tr>
+    <td>Weather Description</td>
+    <td id="desc"></td>
+    </tr>
+    <tr>
+    <td>Temperature</td>
+    <td id="temp"></td>
+    </tr>
+    <tr>
+    <td>Pressure</td>
+    <td id="pressure"></td>
+    </tr>
+    <tr>
+    <td>Humidity</td>
+    <td id="humidity"></td>
+    </tr>
+    <tr>
+    <td>Wind Speed</td>
+    <td id="windy"></td>
+    </tr>
+    <tr>
+    <td>Cloud Cover %</td>
+    <td id="cloud"></td>
+    </tr>
+    <tr>
+    <td>Location</td>
+    <td id="location"></td>
+    </tr>
+    <tr>
+    <td>Sunrise</td>
+    <td id="sunup"></td>
+    </tr>
+    <tr>
+    <td>Sunset</td>
+    <td id="sundown"></td>
+    </tr>
+    <tr>
+    <td>Weather Icon</td>
+    <td id="weatherpic"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+
+`<br>` is a self closing tag.
+
+## Populate Table with Data
+In weather.js below `document.getElementById("weatherData").innerHTML=JSON.stringify(myJson);` add the following line:-
+
+    populateData(myJson)
+
+This calls the function you should add to the bottom of the file:-
+
+    function  populateData(myJson)  {
+	    document.getElementById("desc").innerHTML=myJson.weather[0].description;
+    	document.getElementById("temp").innerHTML=myJson.main.temp  +  'c';
+    	document.getElementById("pressure").innerHTML=myJson.main.pressure  +  ' millibars';
+    	document.getElementById("humidity").innerHTML="DIY"
+    	document.getElementById("windy").innerHTML="DIY"
+    	document.getElementById("cloud").innerHTML="DIY"
+    	document.getElementById("location").innerHTML="DIY"
+    	document.getElementById("sunup").innerHTML="DIY"
+    	document.getElementById("sundown").innerHTML="DIY"
+    	//document.getElementById("weatherpic").innerHTML="IYD"
+    }
+
+Stretch goal. Can you fill in the values marked with DIY? 
+Even stretchier goal - If You Dare - can you make an image appear of the weather in the last line of the function? 
