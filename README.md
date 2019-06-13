@@ -67,9 +67,9 @@ This should look like this:-
 
     <div>
 	    Enter longitude
-	    <input type="number" name="longitude" id="longitude">
+	    <input type="number" name="longitude" id="longitude" value="-5.9301">
 	    Enter Latitude
-	    <input type="number" name="latitude" id="latitude">
+	    <input type="number" name="latitude" id="latitude" value="54.597">
 	    <button id="submitBtn">Submit</button>
     </div>
  Check you can only enter numbers in the fields.
@@ -113,3 +113,100 @@ In the weather.js file add the following:-
     	alert("Your longitude is: " + longitude + " and your latitude " + latitude + "!!!")
     }
   Now when you click the button, it should display an alert that shows any values added for longitude/latitude.
+
+  ## Use OpenWeather API
+We're going to use the free openweather.org api to get the current weather at our location.
+Go to [https://home.openweathermap.org/users/sign_up](https://home.openweathermap.org/users/sign_up) and create an account. 
+When you have an account go to the API Key page and make a note of the key.
+
+In weather.js add the following code:-
+
+    function  getWeatherForLocation(latitude,  longitude)  {
+    	fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=API_KEY_HERE&units=metric&mode=html')
+    	.then(function(response)  {
+	    	return  response.text();
+    	})
+    	.then(function(myText)  {
+	    	console.log(myText);
+	    	document.getElementById("weatherData").innerHTML=myText;
+    	});
+    }
+Replace API_KEY_HERE with your openweather key.
+
+Next call this function from the getWeather() function. So it should now look like this:-
+
+    function  getWeather()  {
+    	var  longitude  =  document.getElementById("longitude").value;
+    	var  latitude  =  document.getElementById("latitude").value;
+    	console.log(longitude);
+    	console.log(latitude);
+    	alert("Your longitude is: "  +  longitude  +  " and your latitude "  +  latitude  +  "!!!")
+    	getWeatherForLocation(latitude,  longitude)
+    }
+Now when you click the submit button you should see some information about the current weather at that location and an image.
+
+# Making the Weather Look Better
+We had previously relied on the open weather api generating the format of the data we got back. Now we are going to take care of this ourselves manually so that it looks better for the users.
+
+## Get JSON Data Instead of HTML
+On the second line of the getWeatherForLocation function change `&mode=html` to `&mode=json`
+Next change the line `return  response.text();` to `return  response.json();`
+In the next two lines change `myText` to `myJson`
+Finally change:-
+
+    document.getElementById("weatherData").innerHTML=myText;
+
+to 
+
+    document.getElementById("weatherData").innerHTML=JSON.stringify(myJson);
+
+Now when you click the submit button after the alert you should get a large amount of text back.  Correctly formatted it looks like this:-
+
+    {
+    "coord":  {
+	    "lon":  -5.93,
+	    "lat":  54.6
+    },
+    "weather":  [
+	    {
+		    "id":  804,
+		    "main":  "Clouds",
+		    "description":  "overcast clouds",
+		    "icon":  "04d"
+	    }
+    ],
+    "base":  "stations",
+    "main":  {
+	    "temp":  11.88,
+	    "pressure":  1005,
+	    "humidity":  71,
+	    "temp_min":  11.67,
+	    "temp_max":  12
+    },
+	"visibility":  10000,
+	"wind":  {
+	    "speed":  4.6,
+	    "deg":  310
+    },
+	"clouds":  {
+	    "all":  100
+    },
+	"dt":  1560430369,
+    "sys":  {
+	    "type":  1,
+	    "id":  1376,
+	    "message":  0.006,
+	    "country":  "GB",
+	    "sunrise":  1560397652,
+	    "sunset":  1560459602
+    },
+    "timezone":  3600,
+    "id":  2655984,
+    "name":  "Belfast",
+    "cod":  200
+    }
+
+We are going to use parts of this data to build our own weather report.
+The values you see above for dt (datetime) and sunrise/sunset are in a format called unix epoch time. This is the number of seconds since 1970-01-01 00:00:00 UTC. This means you don't have to worry about timezones or daylight savings time. You can read more about it at  
+[https://en.wikipedia.org/wiki/Unix_time](https://en.wikipedia.org/wiki/Unix_time)
+
