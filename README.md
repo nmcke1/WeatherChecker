@@ -143,7 +143,7 @@ Next call this function from the getWeather() function. So it should now look li
     	alert("Your longitude is: "  +  longitude  +  " and your latitude "  +  latitude  +  "!!!")
     	getWeatherForLocation(latitude,  longitude)
     }
-Now when you click the submit button you should see some information about the current weather at that location and an image.
+Now when you click the submit button you a call will be made off to the weather api. it will return data about the current weather. Nothing will display on screen because there is an error on the page. Lets work through the error (starting with the console and network tabs).
 
 # Making the Weather Look Better
 We had previously relied on the open weather api generating the format of the data we got back. Now we are going to take care of this ourselves manually so that it looks better for the users.
