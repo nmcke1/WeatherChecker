@@ -9,7 +9,7 @@ First we need to pull the code down from github. In the Git CMD program switch t
 Next we are going to pull down the basic site from github.com.
 
     git config --global http.sslVerify false
-    git clone https://github.com/DonFrog/WeatherChecker.git
+    git clone -b Development https://github.com/DonFrog/WeatherChecker.git
 
 
 
