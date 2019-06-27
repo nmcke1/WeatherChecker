@@ -1,8 +1,10 @@
 # Starting Point
 
-The starting point is an empty HTML file. We are going to build on top of this.
+The starting point is to install git. Go to [https://git-scm.com/download/win](https://git-scm.com/download/win) and install the windows version.
 
-First we need to pull the code down from github. In the Git CMD program switch to the c drive if not already set:-
+Also install Visual Studio Code from [https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+Next we need to pull the code down from GitHub. In the Git Bash program switch to the c drive if not already set:-
 
     c:
 
@@ -14,6 +16,8 @@ Next we are going to pull down the basic site from github.com.
 
 
 # First Steps
+Start VS Code and open the folder we pulled down from GitHub (should be in c:\WeatherChecker)
+Double click on the index.html file to open.
 Add a title so the tab in the browser has a proper name. In the HTML file, in the `<head>` section add a title tag:-
 
     <title>WeatherChecker v1.0</title>
@@ -33,7 +37,7 @@ Next - add the CSS file to the web page. In the `<head>` section add this tag:-
     <link rel="stylesheet" href="./map.css" />
 
 # Adding a Heading
-In the `<body>` section add the following to give us a large heading at the top of the page:-
+Inside the `<body>...</body>` section add the following to give us a large heading at the top of the page:-
 
     <h1>Get the Weather for Anywhere!</h1>
     
@@ -93,7 +97,7 @@ This will create a black border around the text fields and button, with an off-w
 ## Add Javascript to Button
 In the index.html page we need to use javascript to allow the button to perform an action. The first step is to add a link to the javascript file we will use. 
 
-In the `<head>` section add the following:-
+In the `<head>...</head>` section add the following:-
 
     <script type="text/javascript" src="weather.js" type="text/javascript"></script>
 This tells the browser what the file is called, where it resides and the filetype.
@@ -133,15 +137,20 @@ In weather.js add the following code:-
     }
 Replace API_KEY_HERE with your openweather key.
 
-Next call this function from the getWeather() function. So it should now look like this:-
+Also open the map.js file and add your key in the same manner on line 35. You can close map.js once down as we will use this file later.   
 
+Next call this function from within the getWeather() function. 
+
+    getWeatherForLocation(latitude, longitude)
+
+So getWeather() should now look like this with the new line in bold:-
     function  getWeather()  {
     	var  longitude  =  document.getElementById("longitude").value;
     	var  latitude  =  document.getElementById("latitude").value;
     	console.log(longitude);
     	console.log(latitude);
     	alert("Your longitude is: "  +  longitude  +  " and your latitude "  +  latitude  +  "!!!")
-    	getWeatherForLocation(latitude,  longitude)
+    	**getWeatherForLocation(latitude, longitude)**
     }
 Now when you click the submit button you should see some information about the current weather at that location and an image.
 
@@ -263,7 +272,7 @@ Above the closing `</body>` tag add the following code. This is HTML for a table
     </table>
     </div>
 
-`<br>` is a self closing tag.
+`<br>` is a self closing tag. This means unlike the other HTML tags you do **NOT** need to do `<br></br>`
 
 ## Populate Table with Data
 In weather.js below `document.getElementById("weatherData").innerHTML=JSON.stringify(myJson);` add the following line:-
@@ -285,13 +294,13 @@ This calls the function you should add to the bottom of the file:-
     	//document.getElementById("weatherpic").innerHTML="IYD"
     }
 
-Stretch goal. Can you fill in the values marked with DIY? 
+Stretch goal. Can you fill in the values marked with DIY? Note that timestamps will need converted back from Unix Epoch times to normal human readable datetimes. Google is your friend for this.
 Even stretchier goal - If You Dare - can you make an image appear of the weather in the last line of the function? 
 
 ## Add a Map To Make Things Easier
 Not many people know the longitude and latitude, so let's add a map to help everyone.
 
-In the `<head>` of the index.html file add the following line:-
+In the `<head>` section of the index.html file add the following line:-
 
     <link rel="stylesheet"  href="https://openlayers.org/en/v4.6.5/css/ol.css"  type="text/css"  />
 
@@ -309,10 +318,17 @@ This first script file reaches out to openlayers.org to provide mapping data. Th
 
 Next, we will tie the two systems together. We have already written a function, populateData() that will add update our table, so at the bottom of the map.js file, update it to call the function inside the .then call:-
 
-    .then(function(myJson)  {
-        console.log(JSON.stringify(myJson));
-        populateData(myJson)
-    });
+   function  getWeatherForLocation(latitude,  longitude)  {
+        fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=API_KEY_HERE&units=metric&mode=json')
+	        .then(function(response)  {
+		        return  response.json();
+	        })
+	        .then(function(myJson)  {
+		        console.log(myJson);
+		        document.getElementById("weatherData").innerHTML=JSON.stringify(myJson);
+		        **populateData(myJson)**
+	        });
+	}
 
 ## Test It Out
 Reload the page, try clicking on the map. Does the table update?
