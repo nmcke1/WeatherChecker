@@ -23,24 +23,26 @@ localmap.addLayer(vectorLayer);
 localmap.on('singleclick', function (evt) {
 console.log(evt.coordinate);
 
-// convert coordinate to EPSG-4326
-var coOrdinatesClicked = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
-var longitude = coOrdinatesClicked[0]
-var latitude = coOrdinatesClicked[1]
-// console.log(coOrdinatesClicked[0]);
 
 console.log('longitude: ', longitude);
 console.log('latitude: ', latitude);
 
-fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=&units=metric')
+ fetch('https://api.openweathermap.org/data/2.5/weather?lat='+latitude+'&lon='+longitude+'&appid=55a5610b80120161a285928165c46c57&units=metric') 
   .then(function(response) {
+    // convert coordinate to EPSG-4326
+    var coOrdinatesClicked = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
+    var longitude = coOrdinatesClicked[0]
+    var latitude = coOrdinatesClicked[1]
+   // console.log(coOrdinatesClicked[0]);
     return response.json();
+    
+
+    
+    
   })
-  .then(function(myJson) {
-    console.log(JSON.stringify(myJson));
-    populateData(myJson)
+  
   });
 
-});
+
 
 
