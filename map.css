@@ -1,31 +1,46 @@
-body {  
-    background-color:  lightblue;  
+body{
+    /* background-color: rgba(56, 218, 120, 0.973); */
+    
+background-color: l;
+
+background: rgb(232,1,95);
+background: linear-gradient(270deg, rgba(232,0.7,95,0.7) 0%, rgba(121,9,26,0.7) 25%, rgba(0,212,255,0.7) 100%);
 }
 
-.center {
+.center{
     text-align: center;
-    margin: auto;
-    width: 50%;
-    /* border: 3px solid green; */
-    padding: 10px;
 }
-
-.weatherForm {
-    background-color:  whitesmoke;
+.WeatherForm{
+    background-color: whitesmoke;
     border-style: solid;
     border-color: black;
+    border-width: 5px;
     padding: 10px;
     margin-left: 200px;
     margin-right: 200px;
 }
-
-
-
-
-#map {
-width: 100%;
-height: 600px;
+.button{
+    background: grey;
+    border: black;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
-/* Basic styling for map div, 
-if height is not defined the div will show up with 0 px height */
+#submitBtn{
+    color: black;
+    border-style: outset;
+}
+
+
+
+
+
+
+
+
+
