@@ -36,9 +36,11 @@ background: linear-gradient(90deg, rgba(1,107,232,1) 0%, rgba(0,255,238,1) 52%, 
     border-style: outset;
 }
 
-#mapPic{
-    width: 15px;
-    height: 75px;
+#map{
+    
+    margin: auto;
+    width: 80%;
+    height: 600px;
 }
 
 

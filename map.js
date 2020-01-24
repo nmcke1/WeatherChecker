@@ -33,9 +33,15 @@ console.log('latitude: ', latitude);
     var coOrdinatesClicked = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')
     document.getElementById("longitude").value = coOrdinatesClicked[0]
     document.getElementById("latitude").value = coOrdinatesClicked[1]
-    console.log(coOrdinatesClicked[0]);
+
+    
+    // console.log(coOrdinatesClicked[0]);
     
      return response.json();
+    
+    
+    
+    
     
     
     
