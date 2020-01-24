@@ -16,7 +16,7 @@ function getWeatherForLocation(latitude, longitude) {
     })
     .then(function(myJson){
         console.log(myJson);
-      //  document.getElementById("weatherData").innerHTML=JSON.stringify(myJson); 
+        //  document.getElementById("weatherData").innerHTML=JSON.stringify(myJson); 
         
         populateData(myJson)
 
@@ -27,10 +27,13 @@ function getWeatherForLocation(latitude, longitude) {
             document.getElementById("humidity").innerHTML=myJson.main.humidity + ' g/m3'
             document.getElementById("windy").innerHTML=myJson.wind.speed + ' mph'
             document.getElementById("cloud").innerHTML=myJson.clouds.all + ' %';
+            document.getElementById("country").innerHTML=myJson.sys.country;
             document.getElementById("location").innerHTML=myJson.name;
             document.getElementById("sunup").innerHTML= new Date(myJson.sys.sunrise);    
             document.getElementById("sundown").innerHTML= new Date(myJson.sys.sunset);          
-           
+            
+          
+          
             var imageFileLocation = null;
             var imageFileAlt = null;
 
@@ -38,14 +41,20 @@ function getWeatherForLocation(latitude, longitude) {
                  imageFileLocation ="./cloud.png"
                  imageFileAlt = "Cloud Pic"
             } else if (myJson.weather[0].main == "Sunny") {
-              imageFileLocation ="./sun.png"
-              imageFileAlt = "Sun Pic"
+                 imageFileLocation ="./sun.png"
+                 imageFileAlt = "Sun Pic"
             }else if (myJson.weather[0].main == "Rain"){
-              imageFileLocation ="./rain.png"
-              imageFileAlt = "Rain Pic"
+                 imageFileLocation ="./rain.png"
+                 imageFileAlt = "Rain Pic"
              }else if(myJson.weather[0].main == "Snow"){
-             imageFileLocation ="./snow.png"
-             imageFileAlt = "Snow Pic"
+                 imageFileLocation ="./snow.png"
+                 imageFileAlt = "Snow Pic"
+            }else if(myJson.weather[0].main == "Clear"){
+                 imageFileLocation ="./clear sky.png"
+                 imageFileAlt = "Clear Sky Pic"
+            }else if(myJson.weather[0].main == "Mist"){
+                 imageFileLocation ="./mist.png"
+                 imageFileAlt = "Mist pic"
             }
 
           setImage(imageFileLocation, imageFileAlt); 
