@@ -3,8 +3,8 @@ body{
     
 background-color: l;
 
-background: rgb(232,1,95);
-background: linear-gradient(270deg, rgba(232,0.7,95,0.7) 0%, rgba(121,9,26,0.7) 25%, rgba(0,212,255,0.7) 100%);
+background: rgb(1,107,232);
+background: linear-gradient(90deg, rgba(1,107,232,1) 0%, rgba(0,255,238,1) 52%, rgba(0,100,255,1) 100%);
 }
 
 .center{
@@ -20,7 +20,7 @@ background: linear-gradient(270deg, rgba(232,0.7,95,0.7) 0%, rgba(121,9,26,0.7) 
     margin-right: 200px;
 }
 .button{
-    background: grey;
+    background: teal;
     border: black;
     color: white;
     padding: 15px 32px;
@@ -34,6 +34,11 @@ background: linear-gradient(270deg, rgba(232,0.7,95,0.7) 0%, rgba(121,9,26,0.7) 
 #submitBtn{
     color: black;
     border-style: outset;
+}
+
+#mapPic{
+    width: 15px;
+    height: 75px;
 }
 
 
